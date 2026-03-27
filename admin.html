@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noob Quiz - Painel ADM</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <main class="page">
+    <section class="login-screen" id="loginScreen">
+      <div class="card login-card">
+        <div class="badge">Painel Administrativo</div>
+        <h1 class="title">
+          <span class="neon-cyan">NOOB</span>
+          <span class="neon-pink">ADMIN</span>
+        </h1>
+
+        <p class="subtitle">
+          Entre com sua conta de administrador para gerenciar categorias,
+          perguntas, respostas e dificuldade do jogo.
+        </p>
+
+        <form id="adminLoginForm" class="form">
+          <label for="adminEmail">Email</label>
+          <input type="email" id="adminEmail" placeholder="Seu email admin" required />
+
+          <label for="adminPassword">Senha</label>
+          <input type="password" id="adminPassword" placeholder="Sua senha" required />
+
+          <button type="submit" class="btn btn-primary">Entrar no painel</button>
+          <p class="status-message" id="loginStatus"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-screen hidden" id="adminScreen">
+      <header class="topbar card">
+        <div>
+          <p class="mini-label">Administrador logado</p>
+          <h2 id="adminWelcome">Bem-vindo</h2>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn btn-secondary" id="goHomeBtn">Ir para Home</button>
+          <button class="btn btn-danger" id="logoutBtn">Sair</button>
+        </div>
+      </header>
+
+      <section class="dashboard-grid">
+        <article class="card">
+          <h3 class="section-title neon-cyan">Cadastrar Categoria</h3>
+
+          <form id="categoryForm" class="form">
+            <label for="categoryName">Nome da categoria</label>
+            <input type="text" id="categoryName" placeholder="Ex: Básico" required />
+
+            <label for="categorySlug">Slug</label>
+            <input type="text" id="categorySlug" placeholder="Ex: basico" required />
+
+            <label for="categoryPoints">Pontuação da categoria</label>
+            <input type="number" id="categoryPoints" placeholder="Ex: 10" required />
+
+            <label for="categoryOrder">Ordem / dificuldade</label>
+            <input type="number" id="categoryOrder" placeholder="Ex: 1" required />
+
+            <button type="submit" class="btn btn-primary">Salvar categoria</button>
+            <p class="status-message" id="categoryStatus"></p>
+          </form>
+        </article>
+
+        <article class="card">
+          <h3 class="section-title neon-pink">Cadastrar / Editar Pergunta</h3>
+
+          <form id="questionForm" class="form">
+            <input type="hidden" id="questionId" />
+
+            <label for="questionCategory">Categoria</label>
+            <select id="questionCategory" required>
+              <option value="">Selecione uma categoria</option>
+            </select>
+
+            <label for="questionPt">Pergunta em português</label>
+            <textarea id="questionPt" placeholder="Digite a pergunta em PT" required></textarea>
+
+            <label for="questionEn">Pergunta em inglês</label>
+            <textarea id="questionEn" placeholder="Digite a pergunta em EN"></textarea>
+
+            <label for="optionApt">Opção A em PT</label>
+            <input type="text" id="optionApt" required />
+
+            <label for="optionBpt">Opção B em PT</label>
+            <input type="text" id="optionBpt" required />
+
+            <label for="optionCpt">Opção C em PT</label>
+            <input type="text" id="optionCpt" required />
+
+            <label for="optionDpt">Opção D em PT</label>
+            <input type="text" id="optionDpt" required />
+
+            <label for="optionAen">Opção A em EN</label>
+            <input type="text" id="optionAen" />
+
+            <label for="optionBen">Opção B em EN</label>
+            <input type="text" id="optionBen" />
+
+            <label for="optionCen">Opção C em EN</label>
+            <input type="text" id="optionCen" />
+
+            <label for="optionDen">Opção D em EN</label>
+            <input type="text" id="optionDen" />
+
+            <label for="correctOption">Resposta correta</label>
+            <select id="correctOption" required>
+              <option value="">Escolha</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+
+            <label for="difficulty">Dificuldade</label>
+            <select id="difficulty" required>
+              <option value="easy">Fácil</option>
+              <option value="medium">Médio</option>
+              <option value="hard">Difícil</option>
+            </select>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="questionActive" checked />
+              <span>Pergunta ativa</span>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="saveQuestionBtn">Salvar pergunta</button>
+              <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancelar edição</button>
+            </div>
+
+            <p class="status-message" id="questionStatus"></p>
+          </form>
+        </article>
+      </section>
+
+      <section class="list-grid">
+        <article class="card">
+          <div class="list-header">
+            <h3 class="section-title neon-cyan">Categorias cadastradas</h3>
+            <button class="btn btn-secondary small-btn" id="reloadCategoriesBtn">Atualizar</button>
+          </div>
+          <div id="categoriesList" class="list-box"></div>
+        </article>
+
+        <article class="card">
+          <div class="list-header">
+            <h3 class="section-title neon-pink">Perguntas cadastradas</h3>
+            <button class="btn btn-secondary small-btn" id="reloadQuestionsBtn">Atualizar</button>
+          </div>
+          <div id="questionsList" class="list-box"></div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

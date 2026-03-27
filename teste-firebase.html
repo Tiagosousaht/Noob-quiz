@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teste Firebase</title>
+</head>
+<body style="font-family: Arial; padding: 30px; background: #111; color: #fff;">
+  <h1>Teste Firestore</h1>
+  <button id="btn">Criar usuário teste</button>
+  <p id="status">Aguardando...</p>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script>
+    const statusEl = document.getElementById("status");
+    const btn = document.getElementById("btn");
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC5FaWxbSZLGVVg2aLcINPZiXMDzQOYfTI",
+      authDomain: "noob-quiz-1c07b.firebaseapp.com",
+      projectId: "noob-quiz-1c07b",
+      storageBucket: "noob-quiz-1c07b.firebasestorage.app",
+      messagingSenderId: "790627418489",
+      appId: "1:790627418489:web:4227162f7574a49be06fa8",
+      measurementId: "G-D5TZHN03JM"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    btn.addEventListener("click", async () => {
+      statusEl.textContent = "Tentando salvar...";
+
+      const timeout = setTimeout(() => {
+        statusEl.textContent = "Timeout: travou na conexão com Firestore";
+      }, 10000);
+
+      try {
+        const ref = await db.collection("users").add({
+          name: "TesteSimples",
+          score: 0,
+          createdAt: new Date()
+        });
+
+        clearTimeout(timeout);
+        statusEl.textContent = "Salvou com sucesso! ID: " + ref.id;
+        console.log("Salvou:", ref.id);
+      } catch (e) {
+        clearTimeout(timeout);
+        statusEl.textContent = "Erro: " + e.message;
+        console.error("Erro real:", e);
+      }
+    });
+  </script>
+</body>
+</html>

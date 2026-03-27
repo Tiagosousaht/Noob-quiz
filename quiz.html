@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noob Quiz - Quiz</title>
+  <link rel="stylesheet" href="quiz.css" />
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <div class="page">
+    <aside class="sidebar">
+      <section class="panel">
+        <h1 class="logo">
+          <span class="neon-cyan">NOOB</span><br />
+          <span class="neon-pink">QUIZ</span>
+        </h1>
+
+        <p class="subtext">
+          Seu painel neon com nome do jogador, pontuação e ranking global.
+        </p>
+
+        <div class="user-box">
+          <div class="avatar" id="userAvatar">N</div>
+          <div class="user-meta">
+            <h2 id="playerName">Jogador</h2>
+            <p id="playerRankLabel">Rank atual: Noob Iniciante</p>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">Pontuação</span>
+            <span class="stat-value neon-cyan" id="scoreValue">0</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Acertos</span>
+            <span class="stat-value neon-pink" id="correctValue">0</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Pergunta</span>
+            <span class="stat-value neon-cyan" id="questionCounter">0/0</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Melhor rank</span>
+            <span class="stat-value neon-pink" id="bestRankMini">Noob</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel ranking-card">
+        <h3 class="sidebar-title neon-cyan">Ranking Global</h3>
+        <div class="ranking-list" id="rankingList"></div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="chip-group">
+          <div class="chip">Modo: <span class="neon-cyan">Quiz Rápido</span></div>
+          <div class="chip">Idioma: <span class="neon-pink">PT-BR</span></div>
+          <div class="chip">Meta: <span class="neon-cyan">Top 1</span></div>
+        </div>
+
+        <button class="btn btn-secondary" id="backHomeBtn">Voltar para home</button>
+      </div>
+
+      <section class="welcome-card screen" id="welcomeScreen">
+        <h2 class="screen-title">
+          <span class="neon-cyan">Bem-vindo</span> ao
+          <span class="neon-pink">caos</span>
+        </h2>
+
+        <p class="screen-subtitle">
+          Escolha uma categoria, veja quantos pontos ela vale e comece o quiz.
+        </p>
+
+<div class="category-picker">
+  <label for="categorySelect" class="category-label">
+    Escolha a categoria
+  </label>
+
+  <div class="category-select-card">
+    <div class="category-icon">🎯</div>
+
+    <div class="category-select-wrap">
+      <select id="categorySelect" class="category-select">
+        <option value="">Selecione uma categoria</option>
+      </select>
+      <span class="category-arrow">⌄</span>
+      <span class="category-glow"></span>
+    </div>
+  </div>
+
+  <div class="selected-category-preview" id="selectedCategoryPreview">
+    <div class="preview-badge">Categoria selecionada</div>
+    <div class="preview-name neon-cyan">Nenhuma categoria escolhida</div>
+    <div class="preview-points">Escolha uma categoria para ver a pontuação</div>
+  </div>
+</div>
+
+        <button class="btn btn-primary" id="startQuizBtn">Iniciar Quiz</button>
+
+        <div class="game-grid">
+          <div class="game-box">
+            <strong class="neon-cyan">Perguntas online</strong>
+            <p class="subtext">As perguntas vêm do Supabase.</p>
+          </div>
+
+          <div class="game-box">
+            <strong class="neon-pink">Pontuação por categoria</strong>
+            <p class="subtext">Cada categoria vale uma pontuação diferente.</p>
+          </div>
+
+          <div class="game-box">
+            <strong class="neon-cyan">Ranking global</strong>
+            <p class="subtext">Todos os jogadores veem o mesmo ranking.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-card screen hidden" id="quizScreen">
+        <div class="quiz-header">
+          <div class="progress-area">
+            <div class="progress-top">
+              <span id="progressLabel">Pergunta 1 de 1</span>
+              <span id="liveScore">0 pontos</span>
+            </div>
+
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <div class="timer-box">
+            <span class="timer-label">Tempo</span>
+            <span class="timer-value" id="timerValue">15</span>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <span class="question-badge" id="questionCategory">Categoria: Geral</span>
+          <h3 class="question-text" id="questionText">Pergunta aqui...</h3>
+        </div>
+
+        <div class="options" id="optionsContainer"></div>
+      </section>
+
+      <section class="results-card screen hidden" id="resultsScreen">
+        <h2 class="screen-title">
+          <span class="neon-cyan">Resultado</span> final
+        </h2>
+
+        <div class="results-rank neon-pink" id="finalRank">Noob Clássico</div>
+
+        <p class="results-score" id="finalScoreText">
+          Você fez 0 pontos e acertou 0 perguntas.
+        </p>
+
+        <div class="game-grid">
+          <div class="game-box">
+            <strong class="neon-cyan">Pontuação final</strong>
+            <p id="summaryScore">0 pontos</p>
+          </div>
+
+          <div class="game-box">
+            <strong class="neon-pink">Acertos</strong>
+            <p id="summaryCorrect">0 / 0</p>
+          </div>
+
+          <div class="game-box">
+            <strong class="neon-cyan">Seu título</strong>
+            <p id="summaryRank">Noob Iniciante</p>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button class="btn btn-primary" id="playAgainBtn">Jogar Novamente</button>
+          <button class="btn btn-secondary" id="changePlayerBtn">Trocar Jogador</button>
+        </div>
+      </section>
+
+      <p class="footer-note">Noob Quiz • Neon Mode • Ranking Global</p>
+    </main>
+  </div>
+
+  <audio id="bgMusic" loop preload="auto">
+  <source src="assets/audio/music_smt_Zero_Respawn_039.mp3" type="audio/mpeg" />
+</audio>
+
+  <script type="module" src="quiz.js"></script>
+
+  
+</body>
+</html>
