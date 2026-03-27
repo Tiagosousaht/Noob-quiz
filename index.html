@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noob Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <main class="page">
+    <section class="home">
+      <div class="hero">
+        <div class="badge">
+          <span></span>
+          <p>Quiz online • Ranking global • PT / EN</p>
+        </div>
+
+        <h1 class="title">
+          <span class="neon-cyan">NOOB</span><br />
+          <span class="neon-pink">QUIZ</span>
+        </h1>
+
+        <p class="subtitle">
+          Entre no quiz mais caótico da internet, responda perguntas rápidas,
+          suba no ranking online e prove que você não é um verdadeiro noob.
+        </p>
+
+        <div class="cta-group">
+          <button class="btn btn-primary" id="playBtn">Jogar Agora</button>
+          <button class="btn btn-secondary" id="rankingBtn">Ver Ranking</button>
+        </div>
+
+        <div class="stats">
+          <article class="stat-card">
+            <span class="stat-number neon-cyan">+500</span>
+            <span class="stat-label">Perguntas divertidas</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-number neon-pink">24/7</span>
+            <span class="stat-label">Ranking online</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-number neon-cyan">PT / EN</span>
+            <span class="stat-label">Jogue em 2 idiomas</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="glow-line"></div>
+
+        <div class="preview-card">
+          <div class="preview-top">
+            <div class="logo-mini"><span class="neon-cyan">NOOB</span> QUIZ</div>
+            <div class="top-chip">Round 01</div>
+          </div>
+
+          <div class="question-box">
+            <span class="question-tag">Pergunta aleatória</span>
+            <h2 class="question-text">Qual dessas opções definitivamente não é uma fruta?</h2>
+          </div>
+
+          <div class="answers">
+            <div class="answer">
+              <div class="answer-letter">A</div>
+              <span>Banana</span>
+            </div>
+            <div class="answer">
+              <div class="answer-letter">B</div>
+              <span>Maçã</span>
+            </div>
+            <div class="answer">
+              <div class="answer-letter">C</div>
+              <span>Cadeira</span>
+            </div>
+            <div class="answer">
+              <div class="answer-letter">D</div>
+              <span>Uva</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mini-card floating-mini mini-left">
+          <div class="mini-title">Seu título</div>
+          <div class="mini-value neon-pink">Noob Clássico</div>
+        </div>
+
+        <div class="mini-card floating-mini mini-right">
+          <div class="mini-title">Top player</div>
+          <div class="mini-value neon-cyan">#1 TiagoXP</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="nameModal">
+    <div class="modal-card">
+      <button class="close-modal" id="closeModal" aria-label="Fechar">×</button>
+
+      <div class="modal-badge">Primeiro acesso</div>
+      <h2 class="modal-title">
+        <span class="neon-cyan">Escolha seu nome</span>
+      </h2>
+      <p class="modal-text">
+        Seu nome será salvo no ranking e usado em toda a experiência do jogo.
+      </p>
+
+      <form id="nameForm" class="name-form">
+        <label for="playerName" class="input-label">Nome do jogador</label>
+        <input
+          type="text"
+          id="playerName"
+          class="name-input"
+          placeholder="Digite seu nome..."
+          maxlength="18"
+          autocomplete="off"
+        />
+        <p class="helper-text">Use um nome curto e marcante.</p>
+        <button type="submit" class="btn btn-primary submit-btn">Continuar</button>
+        <p class="status-message" id="statusMessage"></p>
+      </form>
+    </div>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
